@@ -143,6 +143,10 @@ type Swimming struct {
 	CountPool  int // количество пересечений бассейна
 }
 
+func (s Swimming) distance() float64 {
+	return float64(s.LengthPool) * float64(s.CountPool) / MInKm
+}
+
 // meanSpeed возвращает среднюю скорость при плавании.
 // Формула расчета:
 // длина_бассейна * количество_пересечений / м_в_км / продолжительность_тренировки
@@ -167,7 +171,7 @@ func (s Swimming) Calories() float64 {
 func (s Swimming) TrainingInfo() InfoMessage {
 	info := s.Training.TrainingInfo()
 	info.MeanSpeed = s.meanSpeed()
-	info.Distance = float64(s.LengthPool) * float64(s.CountPool) / MInKm
+	info.Distance = s.distance()
 	return info
 }
 
